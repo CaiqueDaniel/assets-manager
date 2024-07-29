@@ -8,14 +8,14 @@ export function FormLayout({ children }: Readonly<PropsWithChildren>) {
       height="100vh"
       display="flex"
       justifyContent="center"
-      bgcolor="beige"
+      bgcolor="#efefef"
     >
       <Paper
         sx={{
           maxWidth: "800px",
           width: "100%",
           height: "fit-content",
-          p: "32px",
+          p: 4,
         }}
       >
         {children}
