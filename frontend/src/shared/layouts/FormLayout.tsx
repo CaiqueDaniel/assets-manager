@@ -10,16 +10,18 @@ export function FormLayout({ children }: Readonly<PropsWithChildren>) {
       justifyContent="center"
       bgcolor="#efefef"
     >
-      <Paper
-        sx={{
-          maxWidth: "800px",
-          width: "100%",
-          height: "fit-content",
-          p: 4,
-        }}
-      >
-        {children}
-      </Paper>
+      <Box p={4}>
+        <Paper
+          sx={{
+            maxWidth: "800px",
+            width: "100%",
+            height: "fit-content",
+            p: 4,
+          }}
+        >
+          {children}
+        </Paper>
+      </Box>
     </Box>
   );
 }

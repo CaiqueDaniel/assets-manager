@@ -4,6 +4,7 @@ import {
   Box,
   TextFieldProps,
   Button,
+  Typography,
 } from "@mui/material";
 import { DatePickerProps } from "@mui/x-date-pickers";
 import { Field, Form, Formik } from "formik";
@@ -23,27 +24,40 @@ export function InvestmentFormFeature() {
       {() => (
         <Form>
           <Field
+            as={TextField}
             name="code"
             label="Código"
             sx={{ mb: 2 }}
-            as={TextField}
             fullWidth
           />
 
-          <Field value="operation">
-            {(props: TextFieldProps) => (
-              <TextField
-                select
-                label="Operação"
-                sx={{ mb: 2 }}
-                fullWidth
-                {...props}
-              >
-                <MenuItem value="buy">Compra</MenuItem>
-                <MenuItem value="sell">Venda</MenuItem>
-              </TextField>
-            )}
-          </Field>
+          <Box
+            display="grid"
+            gridTemplateColumns="1fr 1fr"
+            columnGap={2}
+            sx={{ mb: 2 }}
+          >
+            <Field value="operation">
+              {(props: TextFieldProps) => (
+                <TextField
+                  select
+                  label="Operação"
+                  sx={{ mb: 2 }}
+                  fullWidth
+                  {...props}
+                >
+                  <MenuItem value="buy">Compra</MenuItem>
+                  <MenuItem value="sell">Venda</MenuItem>
+                </TextField>
+              )}
+            </Field>
+
+            <Field name="date">
+              {(props: DatePickerProps<any>) => (
+                <DateField {...props} label="Data da operação" sx={{ mb: 2 }} />
+              )}
+            </Field>
+          </Box>
 
           <Box
             display="grid"
@@ -75,12 +89,6 @@ export function InvestmentFormFeature() {
             sx={{ mb: 2 }}
             fullWidth
           />
-
-          <Field name="date">
-            {(props: DatePickerProps<any>) => (
-              <DateField {...props} label="Data da operação" sx={{ mb: 2 }} />
-            )}
-          </Field>
 
           <Button color="primary">Concluir</Button>
         </Form>
