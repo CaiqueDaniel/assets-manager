@@ -1,9 +1,12 @@
+import { useNavigate } from "react-router-dom";
 import { InvestmentFormDto } from "../types/InvestmentFormDto";
 
 export function useInvestmentFormFeaturePresenter() {
+  const navigate = useNavigate();
   const onSubmit = (values: InvestmentFormDto) => {};
+  const onCancel = () => navigate("..");
 
-  return { initialValues, onSubmit };
+  return { initialValues, onSubmit, onCancel };
 }
 
 const initialValues: InvestmentFormDto = {

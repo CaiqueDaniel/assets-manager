@@ -4,7 +4,6 @@ import {
   Box,
   TextFieldProps,
   Button,
-  Typography,
 } from "@mui/material";
 import { DatePickerProps } from "@mui/x-date-pickers";
 import { Field, Form, Formik } from "formik";
@@ -14,7 +13,8 @@ import { InvestmentFormDto } from "../types/InvestmentFormDto";
 import { DateField } from "../../../shared/components/DateField";
 
 export function InvestmentFormFeature() {
-  const { initialValues, onSubmit } = useInvestmentFormFeaturePresenter();
+  const { initialValues, onSubmit, onCancel } =
+    useInvestmentFormFeaturePresenter();
 
   return (
     <Formik<InvestmentFormDto>
@@ -90,7 +90,20 @@ export function InvestmentFormFeature() {
             fullWidth
           />
 
-          <Button color="primary">Concluir</Button>
+          <Box display="grid" gridTemplateColumns="1fr 1fr" columnGap={2}>
+            <Button
+              size="large"
+              variant="outlined"
+              color="error"
+              onClick={onCancel}
+            >
+              Cancelar
+            </Button>
+
+            <Button size="large" variant="contained" color="primary">
+              Concluir
+            </Button>
+          </Box>
         </Form>
       )}
     </Formik>
