@@ -15,7 +15,7 @@ type VariableIncome struct {
 	operations          []Operation
 }
 
-func NewVariableIncome(props CreateStockProps) (*VariableIncome, error) {
+func NewVariableIncome(props CreateVariableIncomeProps) (*VariableIncome, error) {
 	negotiationCurrency, _ := valueobject.NewCurrency(props.NegotiationCurrency)
 	totalValueBought, err := valueobject.NewMoney(0, props.NegotiationCurrency)
 
@@ -97,7 +97,7 @@ func (s *VariableIncome) GetOperations() []Operation {
 	return s.operations
 }
 
-type CreateStockProps struct {
+type CreateVariableIncomeProps struct {
 	Code                string
 	NegotiationCurrency string
 }

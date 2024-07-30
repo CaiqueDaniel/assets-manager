@@ -7,6 +7,6 @@ import (
 )
 
 type VariableIncomeRepository interface {
-	Save(entity *entities.VariableIncome)
-	FindBy(id uuid.UUID)
+	Save(entity *entities.VariableIncome) error
+	FindBy(id uuid.UUID) entities.VariableIncome
 }

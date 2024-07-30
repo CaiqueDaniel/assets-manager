@@ -8,7 +8,7 @@ import (
 )
 
 func TestItShouldCreate(t *testing.T) {
-	result, err := entities.NewVariableIncome(entities.CreateStockProps{
+	result, err := entities.NewVariableIncome(entities.CreateVariableIncomeProps{
 		Code:                "INTR",
 		NegotiationCurrency: valueobject.CURRENCY_BRL,
 	})
@@ -19,7 +19,7 @@ func TestItShouldCreate(t *testing.T) {
 }
 
 func TestItShouldAddAOperation(t *testing.T) {
-	result, err := entities.NewVariableIncome(entities.CreateStockProps{
+	result, err := entities.NewVariableIncome(entities.CreateVariableIncomeProps{
 		Code:                "INTR",
 		NegotiationCurrency: valueobject.CURRENCY_BRL,
 	})
