@@ -9,8 +9,8 @@ import (
 type Stock struct {
 	id                  uuid.UUID
 	code                string
-	negotiationCurrency valueobject.Currency
-	totalValueBought    valueobject.Money
+	negotiationCurrency *valueobject.Currency
+	totalValueBought    *valueobject.Money
 	totalQuantity       float64
 	operations          []Operation
 }
@@ -25,8 +25,8 @@ func NewStock(props CreateStockProps) (*Stock, error) {
 
 	return &Stock{
 		id:                  uuid.New(),
-		negotiationCurrency: *negotiationCurrency,
-		totalValueBought:    *totalValueBought,
+		negotiationCurrency: negotiationCurrency,
+		totalValueBought:    totalValueBought,
 		code:                props.Code,
 		totalQuantity:       0,
 		operations:          make([]Operation, 0),
@@ -37,7 +37,6 @@ func (s *Stock) AddOperation(props CreateOperationProps) error {
 	operation, err := NewOperation(CreateOperationProps{
 		Type:         props.Type,
 		UnitValue:    props.UnitValue,
-		CurrencyType: props.CurrencyType,
 		Quantity:     props.Quantity,
 		Date:         props.Date,
 	})
@@ -46,21 +45,21 @@ func (s *Stock) AddOperation(props CreateOperationProps) error {
 		return err
 	}
 
-	var total *valueobject.Money
+	var totalValueBought *valueobject.Money
 
 	if operation.operationType.IsEqualTo(valueobject.OPERATION_BUY) {
 		s.totalQuantity += operation.quantity
-		total, err = valueobject.NewMoney(
-			s.totalValueBought.GetValue()+(operation.unitValue.GetValue()*operation.quantity),
-			operation.unitValue.GetCurrency(),
+		totalValueBought, err = valueobject.NewMoney(
+			s.totalValueBought.GetValue()+(operation.unitValue*operation.quantity),
+			s.negotiationCurrency.GetValue(),
 		)
 	}
 
 	if operation.operationType.IsEqualTo(valueobject.OPERATION_SELL) {
 		s.totalQuantity -= operation.quantity
-		total, err = valueobject.NewMoney(
-			s.totalValueBought.GetValue()-(operation.unitValue.GetValue()*operation.quantity),
-			operation.unitValue.GetCurrency(),
+		totalValueBought, err = valueobject.NewMoney(
+			s.totalValueBought.GetValue()-(operation.unitValue*operation.quantity),
+			s.negotiationCurrency.GetValue(),
 		)
 	}
 
@@ -68,7 +67,7 @@ func (s *Stock) AddOperation(props CreateOperationProps) error {
 		return err
 	}
 
-	s.totalValueBought = *total
+	s.totalValueBought = totalValueBought
 	s.operations = append(s.operations, *operation)
 
 	return nil
@@ -83,11 +82,11 @@ func (s *Stock) GetCode() string {
 }
 
 func (s *Stock) GetNegotiationCurrency() valueobject.Currency {
-	return s.negotiationCurrency
+	return *s.negotiationCurrency
 }
 
 func (s *Stock) GetTotalValueBought() valueobject.Money {
-	return s.totalValueBought
+	return *s.totalValueBought
 }
 
 func (s *Stock) GetTotalQuantity() float64 {

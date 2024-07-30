@@ -11,8 +11,8 @@ import (
 type Operation struct {
 	id            uuid.UUID
 	quantity      float64
+	unitValue     float64
 	operationType valueobject.OperationType
-	unitValue     valueobject.Money
 	date          time.Time
 }
 
@@ -23,17 +23,11 @@ func NewOperation(props CreateOperationProps) (*Operation, error) {
 		return nil, err
 	}
 
-	unitValue, err := valueobject.NewMoney(props.UnitValue, props.CurrencyType)
-
-	if err != nil {
-		return nil, err
-	}
-
 	operation := &Operation{
 		id:            uuid.New(),
 		quantity:      props.Quantity,
+		unitValue:     props.UnitValue,
 		operationType: *operationType,
-		unitValue:     *unitValue,
 		date:          props.Date,
 	}
 
@@ -47,7 +41,7 @@ func NewOperation(props CreateOperationProps) (*Operation, error) {
 }
 
 func validate(o *Operation) error {
-	if o.unitValue.GetValue() < 0 {
+	if o.unitValue < 0 {
 		return errors.New("Valor não pode ser negativo")
 	}
 
@@ -59,9 +53,8 @@ func validate(o *Operation) error {
 }
 
 type CreateOperationProps struct {
-	Type         string
-	UnitValue    float64
-	CurrencyType string
-	Quantity     float64
-	Date         time.Time
+	Type      string
+	UnitValue float64
+	Quantity  float64
+	Date      time.Time
 }

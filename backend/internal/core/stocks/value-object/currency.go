@@ -18,3 +18,7 @@ func NewCurrency(value string) (*Currency, error) {
 
 	return &Currency{value: value}, nil
 }
+
+func (c *Currency) GetValue() string {
+	return c.value
+}

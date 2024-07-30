@@ -11,7 +11,6 @@ func TestItShouldCreateAOperation(t *testing.T) {
 	result, err := domain.NewOperation(domain.CreateOperationProps{
 		Type:         valueobject.OPERATION_BUY,
 		UnitValue:    1.5,
-		CurrencyType: valueobject.CURRENCY_BRL,
 		Quantity:     1,
 		Date:         time.Date(2024, time.July, 1, 0, 0, 0, 0, time.UTC),
 	})
@@ -25,21 +24,6 @@ func TestItShouldNotCreateAOperationGivenInvalidType(t *testing.T) {
 	result, err := domain.NewOperation(domain.CreateOperationProps{
 		Type:         "invalid",
 		UnitValue:    1.5,
-		CurrencyType: valueobject.CURRENCY_BRL,
-		Quantity:     1,
-		Date:         time.Date(2024, time.July, 1, 0, 0, 0, 0, time.UTC),
-	})
-
-	if result != nil || err == nil {
-		t.Fatal("It should have failed")
-	}
-}
-
-func TestItShouldNotCreateAOperationGivenCurrencyType(t *testing.T) {
-	result, err := domain.NewOperation(domain.CreateOperationProps{
-		Type:         valueobject.OPERATION_BUY,
-		UnitValue:    1.5,
-		CurrencyType: "invalid",
 		Quantity:     1,
 		Date:         time.Date(2024, time.July, 1, 0, 0, 0, 0, time.UTC),
 	})
@@ -53,7 +37,6 @@ func TestItShouldNotCreateAOperationGivenNegativeUnitValue(t *testing.T) {
 	result, err := domain.NewOperation(domain.CreateOperationProps{
 		Type:         valueobject.OPERATION_BUY,
 		UnitValue:    -1.5,
-		CurrencyType: valueobject.CURRENCY_BRL,
 		Quantity:     1,
 		Date:         time.Date(2024, time.July, 1, 0, 0, 0, 0, time.UTC),
 	})
@@ -67,7 +50,6 @@ func TestItShouldNotCreateAOperationGivenNegativeQuantity(t *testing.T) {
 	result, err := domain.NewOperation(domain.CreateOperationProps{
 		Type:         valueobject.OPERATION_BUY,
 		UnitValue:    1.5,
-		CurrencyType: valueobject.CURRENCY_BRL,
 		Quantity:     -1,
 		Date:         time.Date(2024, time.July, 1, 0, 0, 0, 0, time.UTC),
 	})

@@ -29,11 +29,10 @@ func TestItShouldAddAOperation(t *testing.T) {
 	}
 
 	err = result.AddOperation(domain.CreateOperationProps{
-		Type:         valueobject.OPERATION_BUY,
-		CurrencyType: valueobject.CURRENCY_BRL,
-		UnitValue:    1,
-		Quantity:     1,
-		Date:         time.Now(),
+		Type:      valueobject.OPERATION_BUY,
+		UnitValue: 1,
+		Quantity:  1,
+		Date:      time.Now(),
 	})
 
 	if err != nil {
