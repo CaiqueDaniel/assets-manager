@@ -1,7 +1,7 @@
 package domain
 
 import (
-	valueobject "assets-manager/backend/internal/core/stocks/value-object"
+	valueobject "assets-manager/backend/internal/core/investments/value-object"
 
 	"github.com/google/uuid"
 )

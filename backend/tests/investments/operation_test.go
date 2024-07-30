@@ -1,8 +1,8 @@
 package stocks_test
 
 import (
-	"assets-manager/backend/internal/core/stocks/domain"
-	valueobject "assets-manager/backend/internal/core/stocks/value-object"
+	"assets-manager/backend/internal/core/investments/domain"
+	valueobject "assets-manager/backend/internal/core/investments/value-object"
 	"testing"
 	"time"
 )
