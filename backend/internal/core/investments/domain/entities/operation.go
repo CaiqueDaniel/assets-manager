@@ -1,7 +1,7 @@
 package entities
 
 import (
-	valueobject "assets-manager/backend/internal/core/investments/value-object"
+	valueobject "assets-manager/backend/internal/core/investments/domain/value-object"
 	"errors"
 	"time"
 
