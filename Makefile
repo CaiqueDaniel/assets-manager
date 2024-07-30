@@ -1,2 +1,2 @@
 test:
-	go test ./backend/tests/... -v
+	go test ./backend/tests/...
