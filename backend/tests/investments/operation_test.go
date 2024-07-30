@@ -1,14 +1,14 @@
 package investments_test
 
 import (
-	"assets-manager/backend/internal/core/investments/domain"
-	valueobject "assets-manager/backend/internal/core/investments/value-object"
+	"assets-manager/backend/internal/core/investments/domain/entities"
+	valueobject "assets-manager/backend/internal/core/investments/domain/value-object"
 	"testing"
 	"time"
 )
 
 func TestItShouldCreateAOperation(t *testing.T) {
-	result, err := domain.NewOperation(domain.CreateOperationProps{
+	result, err := entities.NewOperation(entities.CreateOperationProps{
 		Type:         valueobject.OPERATION_BUY,
 		UnitValue:    1.5,
 		Quantity:     1,
@@ -21,7 +21,7 @@ func TestItShouldCreateAOperation(t *testing.T) {
 }
 
 func TestItShouldNotCreateAOperationGivenInvalidType(t *testing.T) {
-	result, err := domain.NewOperation(domain.CreateOperationProps{
+	result, err := entities.NewOperation(entities.CreateOperationProps{
 		Type:         "invalid",
 		UnitValue:    1.5,
 		Quantity:     1,
@@ -34,7 +34,7 @@ func TestItShouldNotCreateAOperationGivenInvalidType(t *testing.T) {
 }
 
 func TestItShouldNotCreateAOperationGivenNegativeUnitValue(t *testing.T) {
-	result, err := domain.NewOperation(domain.CreateOperationProps{
+	result, err := entities.NewOperation(entities.CreateOperationProps{
 		Type:         valueobject.OPERATION_BUY,
 		UnitValue:    -1.5,
 		Quantity:     1,
@@ -47,7 +47,7 @@ func TestItShouldNotCreateAOperationGivenNegativeUnitValue(t *testing.T) {
 }
 
 func TestItShouldNotCreateAOperationGivenNegativeQuantity(t *testing.T) {
-	result, err := domain.NewOperation(domain.CreateOperationProps{
+	result, err := entities.NewOperation(entities.CreateOperationProps{
 		Type:         valueobject.OPERATION_BUY,
 		UnitValue:    1.5,
 		Quantity:     -1,

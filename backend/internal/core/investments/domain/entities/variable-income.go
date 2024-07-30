@@ -1,4 +1,4 @@
-package domain
+package entities
 
 import (
 	valueobject "assets-manager/backend/internal/core/investments/value-object"

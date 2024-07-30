@@ -1,14 +1,14 @@
 package investments_test
 
 import (
-	"assets-manager/backend/internal/core/investments/domain"
-	valueobject "assets-manager/backend/internal/core/investments/value-object"
+	"assets-manager/backend/internal/core/investments/domain/entities"
+	valueobject "assets-manager/backend/internal/core/investments/domain/value-object"
 	"testing"
 	"time"
 )
 
 func TestItShouldCreate(t *testing.T) {
-	result, err := domain.NewVariableIncome(domain.CreateStockProps{
+	result, err := entities.NewVariableIncome(entities.CreateStockProps{
 		Code:                "INTR",
 		NegotiationCurrency: valueobject.CURRENCY_BRL,
 	})
@@ -19,7 +19,7 @@ func TestItShouldCreate(t *testing.T) {
 }
 
 func TestItShouldAddAOperation(t *testing.T) {
-	result, err := domain.NewVariableIncome(domain.CreateStockProps{
+	result, err := entities.NewVariableIncome(entities.CreateStockProps{
 		Code:                "INTR",
 		NegotiationCurrency: valueobject.CURRENCY_BRL,
 	})
@@ -28,7 +28,7 @@ func TestItShouldAddAOperation(t *testing.T) {
 		t.FailNow()
 	}
 
-	err = result.AddOperation(domain.CreateOperationProps{
+	err = result.AddOperation(entities.CreateOperationProps{
 		Type:      valueobject.OPERATION_BUY,
 		UnitValue: 1,
 		Quantity:  1,

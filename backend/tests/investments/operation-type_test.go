@@ -1,7 +1,7 @@
 package investments_test
 
 import (
-	valueobject "assets-manager/backend/internal/core/investments/value-object"
+	valueobject "assets-manager/backend/internal/core/investments/domain/value-object"
 	"testing"
 )
 
