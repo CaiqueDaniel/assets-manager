@@ -9,7 +9,8 @@ import (
 
 func TestItShouldCreateAStock(t *testing.T) {
 	result, err := domain.NewStock(domain.CreateStockProps{
-		Code: "INTR",
+		Code:                "INTR",
+		NegotiationCurrency: valueobject.CURRENCY_BRL,
 	})
 
 	if err != nil || result == nil {
@@ -19,7 +20,8 @@ func TestItShouldCreateAStock(t *testing.T) {
 
 func TestItShouldAddAOperation(t *testing.T) {
 	result, err := domain.NewStock(domain.CreateStockProps{
-		Code: "INTR",
+		Code:                "INTR",
+		NegotiationCurrency: valueobject.CURRENCY_BRL,
 	})
 
 	if err != nil || result == nil {
@@ -42,13 +44,13 @@ func TestItShouldAddAOperation(t *testing.T) {
 		t.Fatal("Operation was not registered")
 	}
 
-	total := result.GetTotal()
+	total := result.GetTotalValueBought()
 
 	if total.GetValue() == 0 {
 		t.Fatal("Total was not updated")
 	}
 
-	if result.GetQuantity() == 0 {
+	if result.GetTotalQuantity() == 0 {
 		t.Fatal("Quantity was not updated")
 	}
 }
