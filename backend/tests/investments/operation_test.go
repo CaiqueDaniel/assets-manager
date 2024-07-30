@@ -1,4 +1,4 @@
-package stocks_test
+package investments_test
 
 import (
 	"assets-manager/backend/internal/core/investments/domain"

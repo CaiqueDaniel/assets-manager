@@ -1,4 +1,4 @@
-package stocks_test
+package investments_test
 
 import (
 	"assets-manager/backend/internal/core/investments/domain"
@@ -7,8 +7,8 @@ import (
 	"time"
 )
 
-func TestItShouldCreateAStock(t *testing.T) {
-	result, err := domain.NewStock(domain.CreateStockProps{
+func TestItShouldCreate(t *testing.T) {
+	result, err := domain.NewVariableIncome(domain.CreateStockProps{
 		Code:                "INTR",
 		NegotiationCurrency: valueobject.CURRENCY_BRL,
 	})
@@ -19,7 +19,7 @@ func TestItShouldCreateAStock(t *testing.T) {
 }
 
 func TestItShouldAddAOperation(t *testing.T) {
-	result, err := domain.NewStock(domain.CreateStockProps{
+	result, err := domain.NewVariableIncome(domain.CreateStockProps{
 		Code:                "INTR",
 		NegotiationCurrency: valueobject.CURRENCY_BRL,
 	})

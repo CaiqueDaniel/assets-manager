@@ -6,7 +6,7 @@ import (
 	"github.com/google/uuid"
 )
 
-type Stock struct {
+type VariableIncome struct {
 	id                  uuid.UUID
 	code                string
 	negotiationCurrency *valueobject.Currency
@@ -15,7 +15,7 @@ type Stock struct {
 	operations          []Operation
 }
 
-func NewStock(props CreateStockProps) (*Stock, error) {
+func NewVariableIncome(props CreateStockProps) (*VariableIncome, error) {
 	negotiationCurrency, _ := valueobject.NewCurrency(props.NegotiationCurrency)
 	totalValueBought, err := valueobject.NewMoney(0, props.NegotiationCurrency)
 
@@ -23,7 +23,7 @@ func NewStock(props CreateStockProps) (*Stock, error) {
 		return nil, err
 	}
 
-	return &Stock{
+	return &VariableIncome{
 		id:                  uuid.New(),
 		negotiationCurrency: negotiationCurrency,
 		totalValueBought:    totalValueBought,
@@ -33,12 +33,12 @@ func NewStock(props CreateStockProps) (*Stock, error) {
 	}, nil
 }
 
-func (s *Stock) AddOperation(props CreateOperationProps) error {
+func (s *VariableIncome) AddOperation(props CreateOperationProps) error {
 	operation, err := NewOperation(CreateOperationProps{
-		Type:         props.Type,
-		UnitValue:    props.UnitValue,
-		Quantity:     props.Quantity,
-		Date:         props.Date,
+		Type:      props.Type,
+		UnitValue: props.UnitValue,
+		Quantity:  props.Quantity,
+		Date:      props.Date,
 	})
 
 	if err != nil {
@@ -73,27 +73,27 @@ func (s *Stock) AddOperation(props CreateOperationProps) error {
 	return nil
 }
 
-func (s *Stock) GetId() uuid.UUID {
+func (s *VariableIncome) GetId() uuid.UUID {
 	return s.id
 }
 
-func (s *Stock) GetCode() string {
+func (s *VariableIncome) GetCode() string {
 	return s.code
 }
 
-func (s *Stock) GetNegotiationCurrency() valueobject.Currency {
+func (s *VariableIncome) GetNegotiationCurrency() valueobject.Currency {
 	return *s.negotiationCurrency
 }
 
-func (s *Stock) GetTotalValueBought() valueobject.Money {
+func (s *VariableIncome) GetTotalValueBought() valueobject.Money {
 	return *s.totalValueBought
 }
 
-func (s *Stock) GetTotalQuantity() float64 {
+func (s *VariableIncome) GetTotalQuantity() float64 {
 	return s.totalQuantity
 }
 
-func (s *Stock) GetOperations() []Operation {
+func (s *VariableIncome) GetOperations() []Operation {
 	return s.operations
 }
 
