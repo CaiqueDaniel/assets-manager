@@ -1,24 +1,23 @@
 package usecases
 
 import (
-	"assets-manager/backend/internal/core/investments/domain/entities"
-	"assets-manager/backend/internal/core/investments/domain/repositories"
-	valueobject "assets-manager/backend/internal/core/investments/domain/value-object"
+	"assets-manager/backend/internal/core/investments/domain/operation"
+	variableincome "assets-manager/backend/internal/core/investments/domain/variable-income"
 	"time"
 )
 
 type CreateVariableIncome struct {
-	repository repositories.VariableIncomeRepository
+	repository variableincome.VariableIncomeRepository
 }
 
-func NewCreateVariableIncome(repository repositories.VariableIncomeRepository) *CreateVariableIncome {
+func NewCreateVariableIncome(repository variableincome.VariableIncomeRepository) *CreateVariableIncome {
 	return &CreateVariableIncome{
 		repository: repository,
 	}
 }
 
 func (usecase *CreateVariableIncome) Execute(input CreateVariableIncomeInput) error {
-	entity, err := entities.NewVariableIncome(entities.CreateVariableIncomeProps{
+	entity, err := variableincome.NewVariableIncome(variableincome.CreateVariableIncomeProps{
 		Code:                input.Code,
 		NegotiationCurrency: input.NegotiationCurrency,
 	})
@@ -27,8 +26,8 @@ func (usecase *CreateVariableIncome) Execute(input CreateVariableIncomeInput) er
 		return err
 	}
 
-	err = entity.AddOperation(entities.CreateOperationProps{
-		Type:      valueobject.OPERATION_BUY,
+	err = entity.AddOperation(operation.CreateOperationProps{
+		Type:      operation.OPERATION_BUY,
 		UnitValue: input.InitalOperation.UnitValue,
 		Quantity:  input.InitalOperation.Quantity,
 		Date:      input.InitalOperation.Date,

@@ -1,16 +1,17 @@
 package investments_test
 
 import (
-	"assets-manager/backend/internal/core/investments/domain/entities"
-	valueobject "assets-manager/backend/internal/core/investments/domain/value-object"
+	"assets-manager/backend/internal/core/investments/domain"
+	"assets-manager/backend/internal/core/investments/domain/operation"
+	variableincome "assets-manager/backend/internal/core/investments/domain/variable-income"
 	"testing"
 	"time"
 )
 
 func TestItShouldCreate(t *testing.T) {
-	result, err := entities.NewVariableIncome(entities.CreateVariableIncomeProps{
+	result, err := variableincome.NewVariableIncome(variableincome.CreateVariableIncomeProps{
 		Code:                "INTR",
-		NegotiationCurrency: valueobject.CURRENCY_BRL,
+		NegotiationCurrency: domain.CURRENCY_BRL,
 	})
 
 	if err != nil || result == nil {
@@ -19,17 +20,17 @@ func TestItShouldCreate(t *testing.T) {
 }
 
 func TestItShouldAddAOperation(t *testing.T) {
-	result, err := entities.NewVariableIncome(entities.CreateVariableIncomeProps{
+	result, err := variableincome.NewVariableIncome(variableincome.CreateVariableIncomeProps{
 		Code:                "INTR",
-		NegotiationCurrency: valueobject.CURRENCY_BRL,
+		NegotiationCurrency: domain.CURRENCY_BRL,
 	})
 
 	if err != nil || result == nil {
 		t.FailNow()
 	}
 
-	err = result.AddOperation(entities.CreateOperationProps{
-		Type:      valueobject.OPERATION_BUY,
+	err = result.AddOperation(operation.CreateOperationProps{
+		Type:      operation.OPERATION_BUY,
 		UnitValue: 1,
 		Quantity:  1,
 		Date:      time.Now(),

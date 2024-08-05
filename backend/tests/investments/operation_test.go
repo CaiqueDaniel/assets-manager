@@ -1,18 +1,17 @@
 package investments_test
 
 import (
-	"assets-manager/backend/internal/core/investments/domain/entities"
-	valueobject "assets-manager/backend/internal/core/investments/domain/value-object"
+	op "assets-manager/backend/internal/core/investments/domain/operation"
 	"testing"
 	"time"
 )
 
 func TestItShouldCreateAOperation(t *testing.T) {
-	result, err := entities.NewOperation(entities.CreateOperationProps{
-		Type:         valueobject.OPERATION_BUY,
-		UnitValue:    1.5,
-		Quantity:     1,
-		Date:         time.Date(2024, time.July, 1, 0, 0, 0, 0, time.UTC),
+	result, err := op.NewOperation(op.CreateOperationProps{
+		Type:      op.OPERATION_BUY,
+		UnitValue: 1.5,
+		Quantity:  1,
+		Date:      time.Date(2024, time.July, 1, 0, 0, 0, 0, time.UTC),
 	})
 
 	if err != nil || result == nil {
@@ -21,11 +20,11 @@ func TestItShouldCreateAOperation(t *testing.T) {
 }
 
 func TestItShouldNotCreateAOperationGivenInvalidType(t *testing.T) {
-	result, err := entities.NewOperation(entities.CreateOperationProps{
-		Type:         "invalid",
-		UnitValue:    1.5,
-		Quantity:     1,
-		Date:         time.Date(2024, time.July, 1, 0, 0, 0, 0, time.UTC),
+	result, err := op.NewOperation(op.CreateOperationProps{
+		Type:      "invalid",
+		UnitValue: 1.5,
+		Quantity:  1,
+		Date:      time.Date(2024, time.July, 1, 0, 0, 0, 0, time.UTC),
 	})
 
 	if result != nil || err == nil {
@@ -34,11 +33,11 @@ func TestItShouldNotCreateAOperationGivenInvalidType(t *testing.T) {
 }
 
 func TestItShouldNotCreateAOperationGivenNegativeUnitValue(t *testing.T) {
-	result, err := entities.NewOperation(entities.CreateOperationProps{
-		Type:         valueobject.OPERATION_BUY,
-		UnitValue:    -1.5,
-		Quantity:     1,
-		Date:         time.Date(2024, time.July, 1, 0, 0, 0, 0, time.UTC),
+	result, err := op.NewOperation(op.CreateOperationProps{
+		Type:      op.OPERATION_BUY,
+		UnitValue: -1.5,
+		Quantity:  1,
+		Date:      time.Date(2024, time.July, 1, 0, 0, 0, 0, time.UTC),
 	})
 
 	if result != nil || err == nil {
@@ -47,11 +46,11 @@ func TestItShouldNotCreateAOperationGivenNegativeUnitValue(t *testing.T) {
 }
 
 func TestItShouldNotCreateAOperationGivenNegativeQuantity(t *testing.T) {
-	result, err := entities.NewOperation(entities.CreateOperationProps{
-		Type:         valueobject.OPERATION_BUY,
-		UnitValue:    1.5,
-		Quantity:     -1,
-		Date:         time.Date(2024, time.July, 1, 0, 0, 0, 0, time.UTC),
+	result, err := op.NewOperation(op.CreateOperationProps{
+		Type:      op.OPERATION_BUY,
+		UnitValue: 1.5,
+		Quantity:  -1,
+		Date:      time.Date(2024, time.July, 1, 0, 0, 0, 0, time.UTC),
 	})
 
 	if result != nil || err == nil {

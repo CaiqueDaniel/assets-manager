@@ -2,7 +2,7 @@ package investments_usecases_test
 
 import (
 	usecases "assets-manager/backend/internal/core/investments/application/use-cases"
-	valueobject "assets-manager/backend/internal/core/investments/domain/value-object"
+	"assets-manager/backend/internal/core/investments/domain"
 	repositories_memory "assets-manager/backend/internal/infra/investments/repositories/memory"
 	"testing"
 	"time"
@@ -25,7 +25,7 @@ func TestItShouldCreate(t *testing.T) {
 func getData() usecases.CreateVariableIncomeInput {
 	return usecases.CreateVariableIncomeInput{
 		Code:                "INTR",
-		NegotiationCurrency: valueobject.CURRENCY_USD,
+		NegotiationCurrency: domain.CURRENCY_USD,
 		InitalOperation: usecases.CreateVariableIncomeOperationInput{
 			UnitValue: 1.5,
 			Quantity:  2,

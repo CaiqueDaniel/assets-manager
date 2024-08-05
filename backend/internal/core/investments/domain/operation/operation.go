@@ -1,7 +1,6 @@
-package entities
+package operation
 
 import (
-	valueobject "assets-manager/backend/internal/core/investments/domain/value-object"
 	"errors"
 	"time"
 
@@ -12,12 +11,12 @@ type Operation struct {
 	id            uuid.UUID
 	quantity      float64
 	unitValue     float64
-	operationType valueobject.OperationType
+	operationType OperationType
 	date          time.Time
 }
 
 func NewOperation(props CreateOperationProps) (*Operation, error) {
-	operationType, err := valueobject.NewOperationType(props.Type)
+	operationType, err := NewOperationType(props.Type)
 
 	if err != nil {
 		return nil, err
@@ -50,6 +49,26 @@ func validate(o *Operation) error {
 	}
 
 	return nil
+}
+
+func (o *Operation) GetId() uuid.UUID {
+	return o.id
+}
+
+func (o *Operation) GetQuantity() float64 {
+	return o.quantity
+}
+
+func (o *Operation) GetUnitValue() float64 {
+	return o.unitValue
+}
+
+func (o *Operation) GetOperationType() *OperationType {
+	return &o.operationType
+}
+
+func (o *Operation) GetDate() time.Time {
+	return o.date
 }
 
 type CreateOperationProps struct {

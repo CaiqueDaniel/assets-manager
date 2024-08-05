@@ -1,4 +1,4 @@
-package valueobject
+package domain
 
 type Money struct {
 	value    float64
