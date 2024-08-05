@@ -1,8 +1,7 @@
 export type InvestmentFormDto = {
   code: string;
-  operation: "buy" | "sell";
   unitValue: number;
-  currency: "usd" | "brl";
+  negotiationCurrency: "BRL" | "USD";
   quantity: number;
   date: Date;
 };

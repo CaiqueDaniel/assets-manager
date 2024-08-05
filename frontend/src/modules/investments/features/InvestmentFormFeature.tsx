@@ -29,6 +29,7 @@ export function InvestmentFormFeature() {
             label="Código"
             sx={{ mb: 2 }}
             fullWidth
+            required
           />
 
           <Box
@@ -37,7 +38,7 @@ export function InvestmentFormFeature() {
             columnGap={2}
             sx={{ mb: 2 }}
           >
-            <Field value="operation">
+            <Field value="operation" required>
               {(props: TextFieldProps) => (
                 <TextField
                   select
@@ -52,7 +53,7 @@ export function InvestmentFormFeature() {
               )}
             </Field>
 
-            <Field name="date">
+            <Field name="date" required>
               {(props: DatePickerProps<any>) => (
                 <DateField {...props} label="Data da operação" sx={{ mb: 2 }} />
               )}
@@ -72,7 +73,7 @@ export function InvestmentFormFeature() {
               fullWidth
             />
 
-            <Field name="currency">
+            <Field name="currency" required>
               {(props: TextFieldProps) => (
                 <TextField select label="Moeda" fullWidth {...props}>
                   <MenuItem value="brl">R$</MenuItem>
@@ -88,6 +89,7 @@ export function InvestmentFormFeature() {
             label="Quantidade"
             sx={{ mb: 2 }}
             fullWidth
+            required
           />
 
           <Box display="grid" gridTemplateColumns="1fr 1fr" columnGap={2}>
@@ -100,7 +102,7 @@ export function InvestmentFormFeature() {
               Cancelar
             </Button>
 
-            <Button size="large" variant="contained" color="primary">
+            <Button size="large" variant="contained" color="primary" type="submit">
               Concluir
             </Button>
           </Box>

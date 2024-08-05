@@ -2,12 +2,12 @@ package desktop
 
 import (
 	usecases "assets-manager/backend/internal/core/investments/application/use-cases"
-	"assets-manager/backend/internal/infra/investments/desktop/controllers"
+	variableincome "assets-manager/backend/internal/infra/investments/desktop/variable-income"
 	repositories_memory "assets-manager/backend/internal/infra/investments/repositories/memory"
 )
 
 type InvestmentModule struct {
-	VariableIncomeController *controllers.VariableIncomeController
+	VariableIncomeController *variableincome.VariableIncomeController
 }
 
 func NewInvestmentModule() *InvestmentModule {
@@ -15,6 +15,6 @@ func NewInvestmentModule() *InvestmentModule {
 	createVariableIncome := usecases.NewCreateVariableIncome(variableIncomeRepository)
 
 	return &InvestmentModule{
-		VariableIncomeController: controllers.NewVariableIncomeController(createVariableIncome),
+		VariableIncomeController: variableincome.NewVariableIncomeController(createVariableIncome),
 	}
 }

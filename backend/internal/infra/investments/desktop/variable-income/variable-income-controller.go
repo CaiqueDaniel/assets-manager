@@ -1,8 +1,9 @@
-package controllers
+package variableincome
 
 import (
 	usecases "assets-manager/backend/internal/core/investments/application/use-cases"
-	"assets-manager/backend/internal/infra/investments/desktop/dtos"
+	"fmt"
+	"time"
 )
 
 type VariableIncomeController struct {
@@ -17,14 +18,21 @@ func NewVariableIncomeController(
 	}
 }
 
-func (c *VariableIncomeController) Create(dto *dtos.CreateVariableIncomeDto) error {
+func (c *VariableIncomeController) Create(dto *CreateVariableIncomeDto) error {
+	date, err := time.Parse("2006-01-02T15:04:05Z", dto.Date)
+
+	if err != nil {
+		fmt.Println(err)
+		return err
+	}
+
 	return c.createVariableIncome.Execute(usecases.CreateVariableIncomeInput{
 		Code:                dto.Code,
 		NegotiationCurrency: dto.NegotiationCurrency,
 		InitalOperation: usecases.CreateVariableIncomeOperationInput{
 			UnitValue: dto.UnitValue,
 			Quantity:  dto.Quantity,
-			Date:      dto.Date,
+			Date:      date,
 		},
 	})
 }
