@@ -1,7 +1,6 @@
 package usecases
 
 import (
-	"assets-manager/backend/internal/core/investments/domain/operation"
 	variableincome "assets-manager/backend/internal/core/investments/domain/variable-income"
 	"time"
 )
@@ -26,12 +25,12 @@ func (usecase *CreateVariableIncome) Execute(input CreateVariableIncomeInput) er
 		return err
 	}
 
-	err = entity.AddOperation(operation.CreateOperationProps{
+	/* err = entity.AddOperation(operation.CreateOperationProps{
 		Type:      operation.OPERATION_BUY,
 		UnitValue: input.InitalOperation.UnitValue,
 		Quantity:  input.InitalOperation.Quantity,
 		Date:      input.InitalOperation.Date,
-	})
+	}) */
 
 	if err != nil {
 		return err

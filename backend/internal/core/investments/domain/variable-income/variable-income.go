@@ -3,6 +3,7 @@ package variableincome
 import (
 	"assets-manager/backend/internal/core/investments/domain"
 	op "assets-manager/backend/internal/core/investments/domain/operation"
+	shared "assets-manager/backend/internal/core/shared/domain"
 
 	"github.com/google/uuid"
 )
@@ -34,19 +35,20 @@ func NewVariableIncome(props CreateVariableIncomeProps) (*VariableIncome, error)
 	}, nil
 }
 
-func (s *VariableIncome) AddOperation(props op.CreateOperationProps) error {
-	operation, err := op.NewOperation(op.CreateOperationProps{
+func (s *VariableIncome) AddOperation(props op.CreateOperationProps) *shared.ValidationErrorsCollection {
+	operation, errors := op.NewOperation(op.CreateOperationProps{
 		Type:      props.Type,
 		UnitValue: props.UnitValue,
 		Quantity:  props.Quantity,
 		Date:      props.Date,
 	})
 
-	if err != nil {
-		return err
+	if errors.HasErrors() {
+		return errors
 	}
 
 	var totalValueBought *domain.Money
+	var err error
 
 	if operation.GetOperationType().IsEqualTo(op.OPERATION_BUY) {
 		s.totalQuantity += operation.GetQuantity()
@@ -65,7 +67,8 @@ func (s *VariableIncome) AddOperation(props op.CreateOperationProps) error {
 	}
 
 	if err != nil {
-		return err
+		errors.Add("general", err)
+		return errors
 	}
 
 	s.totalValueBought = totalValueBought

@@ -29,14 +29,14 @@ func TestItShouldAddAOperation(t *testing.T) {
 		t.FailNow()
 	}
 
-	err = result.AddOperation(operation.CreateOperationProps{
+	errors := result.AddOperation(operation.CreateOperationProps{
 		Type:      operation.OPERATION_BUY,
 		UnitValue: 1,
 		Quantity:  1,
 		Date:      time.Now(),
 	})
 
-	if err != nil {
+	if errors.HasErrors() {
 		t.FailNow()
 	}
 

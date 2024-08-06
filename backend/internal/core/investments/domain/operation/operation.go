@@ -1,7 +1,7 @@
 package operation
 
 import (
-	"errors"
+	"assets-manager/backend/internal/core/shared/domain"
 	"time"
 
 	"github.com/google/uuid"
@@ -15,11 +15,12 @@ type Operation struct {
 	date          time.Time
 }
 
-func NewOperation(props CreateOperationProps) (*Operation, error) {
+func NewOperation(props CreateOperationProps) (*Operation, *domain.ValidationErrorsCollection) {
 	operationType, err := NewOperationType(props.Type)
+	errors := domain.NewValidationErrorsCollection()
 
 	if err != nil {
-		return nil, err
+		errors.Add("operation", err)
 	}
 
 	operation := &Operation{
@@ -30,24 +31,24 @@ func NewOperation(props CreateOperationProps) (*Operation, error) {
 		date:          props.Date,
 	}
 
-	err = validate(operation)
+	validationErrors := validate(operation)
 
-	if err != nil {
-		return nil, err
+	if validationErrors.HasErrors() {
+		errors.Merge(validationErrors)
 	}
 
-	return operation, nil
+	if errors.HasErrors() {
+		return nil, errors
+	}
+
+	return operation, errors
 }
 
-func validate(o *Operation) error {
-	if o.unitValue < 0 {
-		return errors.New("Valor não pode ser negativo")
+func validate(o *Operation) *domain.ValidationErrorsCollection {
+	validator := NewValidator()
+	if validator.IsValid(o) {
+		return validator.errors
 	}
-
-	if o.quantity < 0 {
-		return errors.New("Quantidade não pode ser negativa")
-	}
-
 	return nil
 }
 
