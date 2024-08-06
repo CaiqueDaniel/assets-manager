@@ -12,9 +12,9 @@ func NewValidator() *OperationValidator {
 	}
 }
 
-func (v *OperationValidator) IsValid(operation *Operation) bool {
+func (v *OperationValidator) Validate(operation *Operation) *domain.ValidationErrorsCollection {
 	v.errors.AddAll("quantity", domain.NewValidator(operation.quantity).IsFloat().IsPositive().GetErrors())
 	v.errors.AddAll("unitValue", domain.NewValidator(operation.unitValue).IsFloat().IsPositive().GetErrors())
 
-	return v.errors.HasErrors()
+	return v.errors
 }

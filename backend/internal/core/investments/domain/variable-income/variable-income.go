@@ -74,7 +74,7 @@ func (s *VariableIncome) AddOperation(props op.CreateOperationProps) *shared.Val
 	s.totalValueBought = totalValueBought
 	s.operations = append(s.operations, *operation)
 
-	return nil
+	return errors
 }
 
 func (s *VariableIncome) GetId() uuid.UUID {

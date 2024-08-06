@@ -11,30 +11,25 @@ type Operation struct {
 	id            uuid.UUID
 	quantity      float64
 	unitValue     float64
-	operationType OperationType
+	operationType *OperationType
 	date          time.Time
 }
 
 func NewOperation(props CreateOperationProps) (*Operation, *domain.ValidationErrorsCollection) {
-	operationType, err := NewOperationType(props.Type)
-	errors := domain.NewValidationErrorsCollection()
-
-	if err != nil {
-		errors.Add("operation", err)
-	}
+	operationType, operationError := NewOperationType(props.Type)
 
 	operation := &Operation{
 		id:            uuid.New(),
 		quantity:      props.Quantity,
 		unitValue:     props.UnitValue,
-		operationType: *operationType,
+		operationType: operationType,
 		date:          props.Date,
 	}
 
-	validationErrors := validate(operation)
+	errors := validate(operation)
 
-	if validationErrors.HasErrors() {
-		errors.Merge(validationErrors)
+	if operationError != nil {
+		errors.Add("operation", operationError)
 	}
 
 	if errors.HasErrors() {
@@ -45,11 +40,7 @@ func NewOperation(props CreateOperationProps) (*Operation, *domain.ValidationErr
 }
 
 func validate(o *Operation) *domain.ValidationErrorsCollection {
-	validator := NewValidator()
-	if validator.IsValid(o) {
-		return validator.errors
-	}
-	return nil
+	return NewValidator().Validate(o)
 }
 
 func (o *Operation) GetId() uuid.UUID {
@@ -65,7 +56,7 @@ func (o *Operation) GetUnitValue() float64 {
 }
 
 func (o *Operation) GetOperationType() *OperationType {
-	return &o.operationType
+	return o.operationType
 }
 
 func (o *Operation) GetDate() time.Time {

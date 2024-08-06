@@ -4,6 +4,7 @@ import (
 	"assets-manager/backend/internal/core/investments/domain"
 	"assets-manager/backend/internal/core/investments/domain/operation"
 	variableincome "assets-manager/backend/internal/core/investments/domain/variable-income"
+	"fmt"
 	"testing"
 	"time"
 )
@@ -35,6 +36,7 @@ func TestItShouldAddAOperation(t *testing.T) {
 		Quantity:  1,
 		Date:      time.Now(),
 	})
+	fmt.Println(errors)
 
 	if errors.HasErrors() {
 		t.FailNow()

@@ -14,7 +14,7 @@ func TestItShouldCreateAOperation(t *testing.T) {
 		Date:      time.Date(2024, time.July, 1, 0, 0, 0, 0, time.UTC),
 	})
 
-	if err != nil || result == nil {
+	if err.HasErrors() || result == nil {
 		t.Fatal("Invalid operation")
 	}
 }
@@ -27,7 +27,7 @@ func TestItShouldNotCreateAOperationGivenInvalidType(t *testing.T) {
 		Date:      time.Date(2024, time.July, 1, 0, 0, 0, 0, time.UTC),
 	})
 
-	if result != nil || err == nil {
+	if result != nil || !err.HasErrors() {
 		t.Fatal("It should have failed")
 	}
 }
@@ -40,7 +40,7 @@ func TestItShouldNotCreateAOperationGivenNegativeUnitValue(t *testing.T) {
 		Date:      time.Date(2024, time.July, 1, 0, 0, 0, 0, time.UTC),
 	})
 
-	if result != nil || err == nil {
+	if result != nil || !err.HasErrors() {
 		t.FailNow()
 	}
 }
@@ -53,7 +53,7 @@ func TestItShouldNotCreateAOperationGivenNegativeQuantity(t *testing.T) {
 		Date:      time.Date(2024, time.July, 1, 0, 0, 0, 0, time.UTC),
 	})
 
-	if result != nil || err == nil {
+	if result != nil || !err.HasErrors() {
 		t.FailNow()
 	}
 }

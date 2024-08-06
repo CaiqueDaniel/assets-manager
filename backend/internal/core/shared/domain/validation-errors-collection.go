@@ -5,7 +5,9 @@ type ValidationErrorsCollection struct {
 }
 
 func NewValidationErrorsCollection() *ValidationErrorsCollection {
-	return new(ValidationErrorsCollection)
+	return &ValidationErrorsCollection{
+		errors: make(map[string][]error),
+	}
 }
 
 func (v *ValidationErrorsCollection) Add(field string, e error) {
@@ -27,5 +29,10 @@ func (v *ValidationErrorsCollection) Merge(collection *ValidationErrorsCollectio
 }
 
 func (v *ValidationErrorsCollection) HasErrors() bool {
-	return len(v.errors) != 0
+	for _, value := range v.errors {
+		if len(value) != 0 {
+			return true
+		}
+	}
+	return false
 }
