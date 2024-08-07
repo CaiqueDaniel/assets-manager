@@ -1,6 +1,8 @@
 package desktop
 
-import "assets-manager/backend/internal/core/shared/domain"
+import (
+	"assets-manager/backend/internal/core/shared/domain"
+)
 
 const (
 	VALIDATION_ERROR = "VALIDATION"
@@ -14,7 +16,7 @@ type ErrorResponse struct {
 }
 
 func ErrorHandler(exception any) *ErrorResponse {
-	validationErrors, isValidation := exception.(domain.ValidationErrorsCollection)
+	validationErrors, isValidation := exception.(*domain.ValidationErrorsCollection)
 
 	if isValidation {
 		return &ErrorResponse{
