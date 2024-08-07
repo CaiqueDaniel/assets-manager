@@ -11,9 +11,9 @@ import (
 func TestItShouldCreate(t *testing.T) {
 	repository := repositories_memory.NewMemoryVariableIncomeRepository()
 	sut := usecases.NewCreateVariableIncome(repository)
-	err := sut.Execute(getData())
+	validationErrors, generalError := sut.Execute(getData())
 
-	if err != nil {
+	if generalError != nil || validationErrors.HasErrors() {
 		t.FailNow()
 	}
 

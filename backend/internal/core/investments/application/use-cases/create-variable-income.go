@@ -1,7 +1,9 @@
 package usecases
 
 import (
+	"assets-manager/backend/internal/core/investments/domain/operation"
 	variableincome "assets-manager/backend/internal/core/investments/domain/variable-income"
+	shared "assets-manager/backend/internal/core/shared/domain"
 	"time"
 )
 
@@ -15,28 +17,27 @@ func NewCreateVariableIncome(repository variableincome.VariableIncomeRepository)
 	}
 }
 
-func (usecase *CreateVariableIncome) Execute(input CreateVariableIncomeInput) {
-	entity, _ := variableincome.NewVariableIncome(variableincome.CreateVariableIncomeProps{
+func (usecase *CreateVariableIncome) Execute(input CreateVariableIncomeInput) (*shared.ValidationErrorsCollection, error) {
+	entity, validationErrors := variableincome.NewVariableIncome(variableincome.CreateVariableIncomeProps{
 		Code:                input.Code,
 		NegotiationCurrency: input.NegotiationCurrency,
 	})
-
-	/* if errors.HasErrors() {
-		return errors
-	} */
-
-	/* err = entity.AddOperation(operation.CreateOperationProps{
+	operationErrors := entity.AddOperation(operation.CreateOperationProps{
 		Type:      operation.OPERATION_BUY,
 		UnitValue: input.InitalOperation.UnitValue,
 		Quantity:  input.InitalOperation.Quantity,
 		Date:      input.InitalOperation.Date,
-	}) */
+	})
 
-	/* if err != nil {
-		return err
-	} */
+	validationErrors.Merge(operationErrors)
 
-	usecase.repository.Save(entity)
+	if validationErrors.HasErrors() {
+		return validationErrors, nil
+	}
+
+	repositoryError := usecase.repository.Save(entity)
+
+	return validationErrors, repositoryError
 }
 
 type CreateVariableIncomeInput struct {
