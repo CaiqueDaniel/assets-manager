@@ -48,6 +48,29 @@ func (v *Validator) IsPositive() *Validator {
 	return v
 }
 
+func (v *Validator) IsString() *Validator {
+	_, isString := v.value.(string)
+	if !isString {
+		v.addMessage("Não é um texto")
+	}
+	return v
+}
+
+func (v *Validator) IsRequired() *Validator {
+	if v.value == nil {
+		v.addMessage("Campo obrigatório")
+		return v
+	}
+
+	str, _ := v.value.(string)
+
+	if len(str) == 0 {
+		v.addMessage("Campo obrigatório")
+	}
+
+	return v
+}
+
 func (v *Validator) GetErrors() []error {
 	return v.errors
 }

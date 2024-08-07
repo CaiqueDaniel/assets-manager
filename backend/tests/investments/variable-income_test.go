@@ -15,8 +15,19 @@ func TestItShouldCreate(t *testing.T) {
 		NegotiationCurrency: domain.CURRENCY_BRL,
 	})
 
-	if err != nil || result == nil {
+	if err.HasErrors() || result == nil {
 		t.FailNow()
+	}
+}
+
+func TestItShouldNotCreateWithoutACode(t *testing.T) {
+	result, err := variableincome.NewVariableIncome(variableincome.CreateVariableIncomeProps{
+		Code:                "",
+		NegotiationCurrency: domain.CURRENCY_BRL,
+	})
+
+	if result != nil || !err.HasErrors() {
+		t.Error("Failed to validate empty string")
 	}
 }
 
@@ -26,7 +37,7 @@ func TestItShouldAddAOperation(t *testing.T) {
 		NegotiationCurrency: domain.CURRENCY_BRL,
 	})
 
-	if err != nil || result == nil {
+	if err.HasErrors() || result == nil {
 		t.FailNow()
 	}
 

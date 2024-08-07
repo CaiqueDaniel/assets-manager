@@ -17,22 +17,29 @@ type VariableIncome struct {
 	operations          []op.Operation
 }
 
-func NewVariableIncome(props CreateVariableIncomeProps) (*VariableIncome, error) {
+func NewVariableIncome(props CreateVariableIncomeProps) (*VariableIncome, *shared.ValidationErrorsCollection) {
 	negotiationCurrency, _ := domain.NewCurrency(props.NegotiationCurrency)
-	totalValueBought, err := domain.NewMoney(0, props.NegotiationCurrency)
+	totalValueBought, errorMoney := domain.NewMoney(0, props.NegotiationCurrency)
 
-	if err != nil {
-		return nil, err
-	}
-
-	return &VariableIncome{
+	variableIncome := &VariableIncome{
 		id:                  uuid.New(),
 		negotiationCurrency: negotiationCurrency,
 		totalValueBought:    totalValueBought,
 		code:                props.Code,
 		totalQuantity:       0,
 		operations:          make([]op.Operation, 0),
-	}, nil
+	}
+	errors := validate(variableIncome)
+
+	if errorMoney != nil {
+		errors.Add("negotiationCurrency", errorMoney)
+	}
+
+	if errors.HasErrors() {
+		return nil, errors
+	}
+
+	return variableIncome, errors
 }
 
 func (s *VariableIncome) AddOperation(props op.CreateOperationProps) *shared.ValidationErrorsCollection {
@@ -99,6 +106,10 @@ func (s *VariableIncome) GetTotalQuantity() float64 {
 
 func (s *VariableIncome) GetOperations() []op.Operation {
 	return s.operations
+}
+
+func validate(v *VariableIncome) *shared.ValidationErrorsCollection {
+	return NewValidator().Validate(v)
 }
 
 type CreateVariableIncomeProps struct {

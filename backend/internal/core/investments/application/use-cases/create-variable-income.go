@@ -15,15 +15,15 @@ func NewCreateVariableIncome(repository variableincome.VariableIncomeRepository)
 	}
 }
 
-func (usecase *CreateVariableIncome) Execute(input CreateVariableIncomeInput) error {
-	entity, err := variableincome.NewVariableIncome(variableincome.CreateVariableIncomeProps{
+func (usecase *CreateVariableIncome) Execute(input CreateVariableIncomeInput) {
+	entity, _ := variableincome.NewVariableIncome(variableincome.CreateVariableIncomeProps{
 		Code:                input.Code,
 		NegotiationCurrency: input.NegotiationCurrency,
 	})
 
-	if err != nil {
-		return err
-	}
+	/* if errors.HasErrors() {
+		return errors
+	} */
 
 	/* err = entity.AddOperation(operation.CreateOperationProps{
 		Type:      operation.OPERATION_BUY,
@@ -32,11 +32,11 @@ func (usecase *CreateVariableIncome) Execute(input CreateVariableIncomeInput) er
 		Date:      input.InitalOperation.Date,
 	}) */
 
-	if err != nil {
+	/* if err != nil {
 		return err
-	}
+	} */
 
-	return usecase.repository.Save(entity)
+	usecase.repository.Save(entity)
 }
 
 type CreateVariableIncomeInput struct {
