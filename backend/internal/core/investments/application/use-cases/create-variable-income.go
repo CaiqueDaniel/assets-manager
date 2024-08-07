@@ -22,6 +22,11 @@ func (usecase *CreateVariableIncome) Execute(input CreateVariableIncomeInput) (*
 		Code:                input.Code,
 		NegotiationCurrency: input.NegotiationCurrency,
 	})
+
+	if validationErrors.HasErrors() {
+		return validationErrors, nil
+	}
+
 	operationErrors := entity.AddOperation(operation.CreateOperationProps{
 		Type:      operation.OPERATION_BUY,
 		UnitValue: input.InitalOperation.UnitValue,
