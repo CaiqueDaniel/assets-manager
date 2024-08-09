@@ -1,24 +1,26 @@
 package domain
 
 type ValidationErrorsCollection struct {
-	errors map[string][]error
+	errors map[string][]string
 }
 
 func NewValidationErrorsCollection() *ValidationErrorsCollection {
 	return &ValidationErrorsCollection{
-		errors: make(map[string][]error),
+		errors: make(map[string][]string),
 	}
 }
 
 func (v *ValidationErrorsCollection) Add(field string, e error) {
-	v.errors[field] = append(v.errors[field], e)
+	v.errors[field] = append(v.errors[field], e.Error())
 }
 
 func (v *ValidationErrorsCollection) AddAll(field string, errors []error) {
-	v.errors[field] = append(v.errors[field], errors...)
+	for _, error := range errors {
+		v.errors[field] = append(v.errors[field], error.Error())
+	}
 }
 
-func (v *ValidationErrorsCollection) GetAll() map[string][]error {
+func (v *ValidationErrorsCollection) GetAll() map[string][]string {
 	return v.errors
 }
 

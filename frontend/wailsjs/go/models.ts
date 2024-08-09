@@ -1,3 +1,20 @@
+export namespace desktop {
+	
+	export class ErrorResponse {
+	
+	
+	    static createFrom(source: any = {}) {
+	        return new ErrorResponse(source);
+	    }
+	
+	    constructor(source: any = {}) {
+	        if ('string' === typeof source) source = JSON.parse(source);
+	
+	    }
+	}
+
+}
+
 export namespace variableincome {
 	
 	export class CreateVariableIncomeDto {

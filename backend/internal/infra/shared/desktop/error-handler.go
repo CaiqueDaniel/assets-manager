@@ -12,7 +12,7 @@ const (
 type ErrorResponse struct {
 	Type    string
 	Message string
-	Errors  map[string][]error
+	Errors  map[string][]string
 }
 
 func ErrorHandler(exception any) *ErrorResponse {
@@ -29,6 +29,6 @@ func ErrorHandler(exception any) *ErrorResponse {
 	return &ErrorResponse{
 		Type:    FATAL_ERROR,
 		Message: "Erro interno",
-		Errors:  make(map[string][]error),
+		Errors:  make(map[string][]string),
 	}
 }

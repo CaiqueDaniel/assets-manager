@@ -1,6 +1,6 @@
 import { Typography } from "@mui/material";
 import { FormLayout } from "../../../shared/layouts/FormLayout";
-import { InvestmentFormFeature } from "../features/InvestmentFormFeature";
+import { InvestmentFormFeature } from "../features/InvestmentFormFeature/InvestmentFormFeature";
 
 export function AddInvestmentPage() {
   return (
