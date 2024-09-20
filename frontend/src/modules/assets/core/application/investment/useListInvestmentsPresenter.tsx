@@ -14,13 +14,13 @@ export function useListInvestmentsPresenter(
 
   return {
     investments: investments.map(
-      ({ id, code, currency, quantity, type, unitValue }) => ({
+      ({ id, code, currency, quantity, type, totalValue }) => ({
         id: id as string,
         code,
         currency,
         quantity,
         type,
-        unitValue,
+        totalValue,
       })
     ),
     currentPage,

@@ -2,7 +2,7 @@ export class Investment {
   constructor(
     private _code: string,
     private _type: InvestmentType,
-    private _unitValue: number,
+    private _totalValue: number,
     private _currency: CurrencyType,
     private _quantity: number,
     private _id?: string
@@ -20,8 +20,8 @@ export class Investment {
     return this._type;
   }
 
-  get unitValue() {
-    return this._unitValue;
+  get totalValue() {
+    return this._totalValue;
   }
 
   get currency() {

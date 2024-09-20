@@ -1,6 +1,9 @@
 import { IconButton, TableCell } from '@mui/material';
 import EditIcon from '@mui/icons-material/Edit';
-import { CurrencyType, InvestmentType } from '../../../../../core/domain/investment/Investment';
+import {
+  CurrencyType,
+  InvestmentType,
+} from '../../../../../core/domain/investment/Investment';
 import { NumberFormatter } from '../../../../../../shared/infra/helpers/NumberFormatter';
 
 export function InvestmentRow({
@@ -8,13 +11,13 @@ export function InvestmentRow({
   currency,
   quantity,
   type,
-  unitValue,
+  totalValue,
 }: Props) {
   return (
     <>
       <TableCell>{code}</TableCell>
       <TableCell>{quantity.toLocaleString('pt-br')}</TableCell>
-      <TableCell>{NumberFormatter.toCurrency(unitValue, currency)}</TableCell>
+      <TableCell>{NumberFormatter.toCurrency(totalValue, currency)}</TableCell>
       <TableCell>{type}</TableCell>
       <TableCell>
         <IconButton onClick={() => {}}>
@@ -30,5 +33,5 @@ type Props = {
   currency: CurrencyType;
   quantity: number;
   type: InvestmentType;
-  unitValue: number;
+  totalValue: number;
 };
