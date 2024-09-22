@@ -1,4 +1,4 @@
-import { Operation } from './Operation';
+import { Operation } from '../operation/Operation';
 
 export class Investment {
   private _operations: Operation[] = [];

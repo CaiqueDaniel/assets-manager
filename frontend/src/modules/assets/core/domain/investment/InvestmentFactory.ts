@@ -1,5 +1,4 @@
-import { Investment } from "./Investment";
+import { EntityFactory } from '~/modules/shared/core/EntityFactory';
+import { Investment } from './Investment';
 
-export interface InvestmentFactory<T> {
-  create(props: T): Investment;
-}
+export interface InvestmentFactory<T> extends EntityFactory<T, Investment> {}
