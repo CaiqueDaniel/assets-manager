@@ -1,3 +1,4 @@
+import { NumberParser } from '~/modules/shared/infra/helpers/NumberParser';
 import {
   CurrencyType,
   Investment,
@@ -6,15 +7,23 @@ import {
 import { InvestmentFactory } from '../../domain/investment/InvestmentFactory';
 import { InvestmentFormDto } from './InvestmentFormDto';
 
-export class AppInvestmentFactory implements InvestmentFactory<Props> {
+export class FormInvestmentFactory implements InvestmentFactory<Props> {
   create(props: Props): Investment {
-    return new Investment(
+    const investment = new Investment(
       props.code,
       props.type as InvestmentType,
-      0,//parseFloat(props.totalValue),
+      0,
       props.currency as CurrencyType,
-      0,//parseFloat(props.initialOperation.quantity)
+      0
     );
+
+    investment.addOperation({
+      date: props.date,
+      quantity: NumberParser.toFloat(props.quantity),
+      unitValue: NumberParser.toFloat(props.unitValue),
+    });
+
+    return investment;
   }
 }
 

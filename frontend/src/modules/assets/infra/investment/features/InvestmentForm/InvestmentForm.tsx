@@ -5,12 +5,12 @@ import { InvestmentFormFields } from './components/InvestmentFormFields';
 import { InvestmentFormDto } from '~/modules/assets/core/application/investment/InvestmentFormDto';
 import { useInvestmentFormPresenter } from '~/modules/assets/core/application/investment/useInvestmentFormPresenter';
 import { MemoryInvestmentGateway } from '../../gateways/MemoryInvestmentGateway';
-import { AppInvestmentFactory } from '~/modules/assets/core/application/investment/AppInvestmentFactory';
+import { FormInvestmentFactory } from '~/modules/assets/core/application/investment/FormInvestmentFactory';
 
 export function InvestmentForm() {
   const { initialValues, onSubmit } = useInvestmentFormPresenter(
     new MemoryInvestmentGateway(),
-    new AppInvestmentFactory()
+    new FormInvestmentFactory()
   );
 
   return (

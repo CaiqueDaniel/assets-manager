@@ -1,9 +1,8 @@
-import { AppInvestmentFactory } from '~/modules/assets/core/application/investment/AppInvestmentFactory';
 import { InvestmentFormDto } from '~/modules/assets/core/application/investment/InvestmentFormDto';
 import { useInvestmentFormPresenter } from '~/modules/assets/core/application/investment/useInvestmentFormPresenter';
+
 import { InvestmentFactory } from '~/modules/assets/core/domain/investment/InvestmentFactory';
 import { InvestmentGateway } from '~/modules/assets/core/domain/investment/InvestmentGateway';
-import { InvestmentBuilder } from '~/tests/fixture/assets/AssetsFixtures';
 
 describe('useInvestmentFormPresenter unit tests', () => {
   let gateway: jest.Mocked<InvestmentGateway>;
