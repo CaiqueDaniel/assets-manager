@@ -1,29 +1,41 @@
 import { Box, MenuItem, TextField } from '@mui/material';
 import { Field, useFormikContext } from 'formik';
+import { InvestmentFormDto } from '~/modules/assets/core/application/investment/InvestmentFormDto';
 import { DateField } from '~/modules/shared/infra/components/DateField';
 import { NumberField } from '~/modules/shared/infra/components/NumberField';
 
 export function InvestmentFormFields() {
-  const { setFieldValue } = useFormikContext();
+  const { setFieldValue, errors } = useFormikContext<InvestmentFormDto>();
   const onChangeOperationDate = (value: Date) => setFieldValue('date', value);
 
   return (
     <>
-      <Field as={TextField} name="code" label="Código" sx={{ mb: 2 }} fullWidth />
+      <Box display="grid" gridTemplateColumns="1fr 1fr" columnGap={2}>
+        <Field
+          as={TextField}
+          name="code"
+          label="Código"
+          sx={{ mb: 2 }}
+          error={Boolean(errors.code)}
+          helperText={errors.code}
+          fullWidth
+        />
 
-      <Field
-        as={TextField}
-        name="type"
-        label="Tipo"
-        sx={{ mb: 2 }}
-        fullWidth
-        select
-      >
-        <MenuItem value="Variable">
-          Renda Variável (Ações, fundos, etc...)
-        </MenuItem>
-        <MenuItem value="CDB">CDB</MenuItem>
-      </Field>
+        <Field
+          as={TextField}
+          name="type"
+          label="Tipo"
+          sx={{ mb: 2 }}
+          error={Boolean(errors.type)}
+          helperText={errors.type}
+          fullWidth
+          select
+        >
+          <MenuItem value="Stocks">Ações</MenuItem>
+          <MenuItem value="Funds">Fundos/ETFs</MenuItem>
+          <MenuItem value="CDB">CDB/Time Deposit</MenuItem>
+        </Field>
+      </Box>
 
       <Field name="date">
         {(props: any) => (
@@ -43,9 +55,11 @@ export function InvestmentFormFields() {
         sx={{ mb: 2 }}
       >
         <Field
-          name="negotiationCurrency"
+          name="currency"
           label="Moeda"
           as={TextField}
+          error={Boolean(errors.currency)}
+          helperText={errors.currency}
           select
           fullWidth
         >
@@ -53,13 +67,21 @@ export function InvestmentFormFields() {
           <MenuItem value="USD">US$</MenuItem>
         </Field>
 
-        <Field as={NumberField} name="unitValue" label="Valor por cota/ação" />
+        <Field
+          as={NumberField}
+          name="unitValue"
+          label="Valor por cota/ação"
+          error={Boolean(errors.unitValue)}
+          helperText={errors.unitValue}
+        />
 
         <Field
           as={NumberField}
           name="quantity"
           label="Quantidade"
           sx={{ mb: 2 }}
+          error={Boolean(errors.quantity)}
+          helperText={errors.quantity}
         />
       </Box>
     </>

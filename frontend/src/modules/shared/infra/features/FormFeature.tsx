@@ -3,16 +3,22 @@ import { Form, Formik, FormikValues } from 'formik';
 import { PropsWithChildren } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { SubmitButton } from '../components/SubmitButton';
+import * as Yup from 'yup';
 
 export function FormFeature<T extends FormikValues>({
   initialValues,
   onSubmit,
   children,
+  validationSchema,
 }: Props<T>) {
   const navigate = useNavigate();
 
   return (
-    <Formik<T> initialValues={initialValues} onSubmit={onSubmit}>
+    <Formik<T>
+      initialValues={initialValues}
+      validationSchema={validationSchema}
+      onSubmit={onSubmit}
+    >
       {({ isSubmitting }) => (
         <Form>
           {children}
@@ -36,5 +42,6 @@ export function FormFeature<T extends FormikValues>({
 
 type Props<T> = PropsWithChildren & {
   initialValues: T;
+  validationSchema?: Yup.Schema;
   onSubmit: (values: T) => void;
 };

@@ -23,8 +23,6 @@ export function NumberField({ errors, ...props }: Readonly<Props>) {
   return (
     <MUITextField
       {...props}
-      error={Boolean(errors?.length)}
-      helperText={errors && errors[0]}
       type="tel"
       onInput={onInput}
       inputProps={{ style: { textAlign: "end" } }}
