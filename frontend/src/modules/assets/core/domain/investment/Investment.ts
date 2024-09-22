@@ -1,38 +1,34 @@
+import { Operation } from './Operation';
+
 export class Investment {
+  private _operations: Operation[] = [];
+
   constructor(
-    private _code: string,
-    private _type: InvestmentType,
-    private _totalValue: number,
-    private _currency: CurrencyType,
-    private _quantity: number,
-    private _id?: string
+    public readonly code: string,
+    public readonly type: InvestmentType,
+    public readonly totalValue: number,
+    public readonly currency: CurrencyType,
+    public readonly quantity: number,
+    public readonly id?: string
   ) {}
 
-  get id() {
-    return this._id;
+  addOperation(props: AddOperationProps) {
+    this._operations.push(
+      new Operation(props.unitValue, props.quantity, props.date)
+    );
   }
 
-  get code() {
-    return this._code;
-  }
-
-  get type() {
-    return this._type;
-  }
-
-  get totalValue() {
-    return this._totalValue;
-  }
-
-  get currency() {
-    return this._currency;
-  }
-
-  get quantity() {
-    return this._quantity;
+  get operations() {
+    return this._operations;
   }
 }
 
 export type CurrencyType = 'BRL' | 'USD';
 
 export type InvestmentType = 'Variable' | 'CDB';
+
+type AddOperationProps = {
+  unitValue: number;
+  quantity: number;
+  date: Date;
+};
