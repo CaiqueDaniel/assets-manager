@@ -14,7 +14,7 @@ export class Investment {
 
   addOperation(props: AddOperationProps) {
     this._operations.push(
-      new Operation(props.unitValue, props.quantity, props.date)
+      new Operation('buy',props.unitValue, props.quantity, props.date)
     );
   }
 

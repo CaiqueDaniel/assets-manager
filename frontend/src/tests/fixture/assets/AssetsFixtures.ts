@@ -1,8 +1,11 @@
+import { OperationFormDto } from '~/modules/assets/core/application/operation/OperationFormDto';
 import {
   CurrencyType,
   Investment,
   InvestmentType,
 } from '~/modules/assets/core/domain/investment/Investment';
+import { OperationFactory } from '~/modules/assets/core/domain/operation/OperationFactory';
+import { OperationGateway } from '~/modules/assets/core/domain/operation/OperationGateway';
 
 export class InvestmentBuilder {
   private code = 'INTR';
@@ -37,3 +40,14 @@ export class InvestmentBuilder {
     );
   }
 }
+
+export const mockedOperationGateway: jest.Mocked<OperationGateway> = {
+  save: jest.fn(),
+  findById: jest.fn(),
+};
+
+export const mockedOperationFactory: jest.Mocked<
+  OperationFactory<OperationFormDto>
+> = {
+  create: jest.fn(),
+};
