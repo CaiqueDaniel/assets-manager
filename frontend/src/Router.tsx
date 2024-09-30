@@ -1,8 +1,8 @@
 import { createBrowserRouter, Outlet, RouterProvider } from 'react-router-dom';
-import { InvestmentsPage } from './modules/assets/infra/investment/pages/InvestmentsPage';
-import { AddInvestmentPage } from './modules/assets/infra/investment/pages/AddInvestmentPage';
-import { AddOperationPage } from './modules/assets/infra/operation/pages/AddOperationPage';
-import { UpdateOperationPage } from './modules/assets/infra/operation/pages/UpdateOperationPage';
+import { InvestmentsPage } from './modules/financial-assets/infra/investment/pages/InvestmentsPage';
+import { AddInvestmentPage } from './modules/financial-assets/infra/investment/pages/AddInvestmentPage';
+import { AddOperationPage } from './modules/financial-assets/infra/operation/pages/AddOperationPage';
+import { UpdateOperationPage } from './modules/financial-assets/infra/operation/pages/UpdateOperationPage';
 
 export function Router() {
   const router = createBrowserRouter([

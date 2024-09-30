@@ -1,11 +1,11 @@
-import { OperationFormDto } from '~/modules/assets/core/application/operation/OperationFormDto';
+import { OperationFormDto } from '~/modules/financial-assets/core/application/operation/OperationFormDto';
 import {
   CurrencyType,
   Investment,
   InvestmentType,
-} from '~/modules/assets/core/domain/investment/Investment';
-import { OperationFactory } from '~/modules/assets/core/domain/operation/OperationFactory';
-import { OperationGateway } from '~/modules/assets/core/domain/operation/OperationGateway';
+} from '~/modules/financial-assets/core/domain/investment/Investment';
+import { OperationFactory } from '~/modules/financial-assets/core/domain/operation/OperationFactory';
+import { OperationGateway } from '~/modules/financial-assets/core/domain/operation/OperationGateway';
 
 export class InvestmentBuilder {
   private code = 'INTR';

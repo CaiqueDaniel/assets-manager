@@ -1,8 +1,8 @@
-import { InvestmentFormDto } from '~/modules/assets/core/application/investment/InvestmentFormDto';
-import { useInvestmentFormPresenter } from '~/modules/assets/core/application/investment/useInvestmentFormPresenter';
+import { InvestmentFormDto } from '~/modules/financial-assets/core/application/investment/InvestmentFormDto';
+import { useInvestmentFormPresenter } from '~/modules/financial-assets/core/application/investment/useInvestmentFormPresenter';
 
-import { InvestmentFactory } from '~/modules/assets/core/domain/investment/InvestmentFactory';
-import { InvestmentGateway } from '~/modules/assets/core/domain/investment/InvestmentGateway';
+import { InvestmentFactory } from '~/modules/financial-assets/core/domain/investment/InvestmentFactory';
+import { InvestmentGateway } from '~/modules/financial-assets/core/domain/investment/InvestmentGateway';
 
 describe('useInvestmentFormPresenter unit tests', () => {
   let gateway: jest.Mocked<InvestmentGateway>;

@@ -1,6 +1,6 @@
 import { Typography } from '@mui/material';
 import { FormLayout } from '../../../../shared/infra/layouts/FormLayout';
-import { InvestmentForm } from '../../../../assets/infra/investment/features/InvestmentForm/InvestmentForm';
+import { InvestmentForm } from '../features/InvestmentForm/InvestmentForm';
 
 export function AddInvestmentPage() {
   return (

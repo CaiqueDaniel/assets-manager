@@ -1,4 +1,4 @@
-import { SaveOperationUseCase } from '~/modules/assets/core/application/operation/SaveOperationUseCase';
+import { SaveOperationUseCase } from '~/modules/financial-assets/core/application/operation/SaveOperationUseCase';
 import {
   mockedOperationFactory,
   mockedOperationGateway,

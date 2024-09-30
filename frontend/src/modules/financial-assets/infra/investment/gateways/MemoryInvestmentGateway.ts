@@ -1,4 +1,4 @@
-import { InvestmentGateway } from '~/modules/assets/core/domain/investment/InvestmentGateway';
+import { InvestmentGateway } from '~/modules/financial-assets/core/domain/investment/InvestmentGateway';
 import { PaginatedResult } from '../../../../shared/core/PaginatedResult';
 import { InvestmentQueryRepository } from '../../../core/application/investment/InvestmentQueryRepository';
 import { Investment } from '../../../core/domain/investment/Investment';

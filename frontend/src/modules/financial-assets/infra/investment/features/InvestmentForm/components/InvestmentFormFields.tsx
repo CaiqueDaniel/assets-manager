@@ -1,6 +1,6 @@
 import { Box, MenuItem, TextField } from '@mui/material';
 import { Field, useFormikContext } from 'formik';
-import { InvestmentFormDto } from '~/modules/assets/core/application/investment/InvestmentFormDto';
+import { InvestmentFormDto } from '~/modules/financial-assets/core/application/investment/InvestmentFormDto';
 import { DateField } from '~/modules/shared/infra/components/DateField';
 import { NumberField } from '~/modules/shared/infra/components/NumberField';
 

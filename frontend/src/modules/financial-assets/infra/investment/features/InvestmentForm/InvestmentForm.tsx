@@ -1,11 +1,11 @@
 import * as Yup from 'yup';
 
-import { FormFeature } from '../../../../../../modules/shared/infra/features/FormFeature';
+import { FormFeature } from '../../../../../shared/infra/features/FormFeature';
 import { InvestmentFormFields } from './components/InvestmentFormFields';
-import { InvestmentFormDto } from '~/modules/assets/core/application/investment/InvestmentFormDto';
-import { useInvestmentFormPresenter } from '~/modules/assets/core/application/investment/useInvestmentFormPresenter';
+import { InvestmentFormDto } from '~/modules/financial-assets/core/application/investment/InvestmentFormDto';
+import { useInvestmentFormPresenter } from '~/modules/financial-assets/core/application/investment/useInvestmentFormPresenter';
 import { MemoryInvestmentGateway } from '../../gateways/MemoryInvestmentGateway';
-import { FormInvestmentFactory } from '~/modules/assets/core/application/investment/FormInvestmentFactory';
+import { FormInvestmentFactory } from '~/modules/financial-assets/core/application/investment/FormInvestmentFactory';
 
 export function InvestmentForm() {
   const { initialValues, onSubmit } = useInvestmentFormPresenter(
