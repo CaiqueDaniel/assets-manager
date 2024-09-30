@@ -7,6 +7,7 @@ export class MemoryOperationGateway implements OperationGateway {
   }
 
   async findById(): Promise<Operation> {
+    await new Promise((resolve) => setTimeout(() => resolve(true), 10));
     return new Operation('buy', 3, 1, new Date(), crypto.randomUUID());
   }
 }
