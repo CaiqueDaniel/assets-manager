@@ -1,9 +1,12 @@
+import { InvestmentFormDto } from '~/modules/financial-assets/core/application/investment/InvestmentFormDto';
 import { OperationFormDto } from '~/modules/financial-assets/core/application/operation/OperationFormDto';
 import {
   CurrencyType,
   Investment,
   InvestmentType,
 } from '~/modules/financial-assets/core/domain/investment/Investment';
+import { InvestmentFactory } from '~/modules/financial-assets/core/domain/investment/InvestmentFactory';
+import { InvestmentGateway } from '~/modules/financial-assets/core/domain/investment/InvestmentGateway';
 import { OperationFactory } from '~/modules/financial-assets/core/domain/operation/OperationFactory';
 import { OperationGateway } from '~/modules/financial-assets/core/domain/operation/OperationGateway';
 
@@ -40,6 +43,17 @@ export class InvestmentBuilder {
     );
   }
 }
+
+export const mockedInvestmentGateway: jest.Mocked<InvestmentGateway> = {
+  save: jest.fn(),
+  findById: jest.fn(),
+};
+
+export const mockedInvestmentFactory: jest.Mocked<
+  InvestmentFactory<InvestmentFormDto>
+> = {
+  create: jest.fn(),
+};
 
 export const mockedOperationGateway: jest.Mocked<OperationGateway> = {
   save: jest.fn(),
