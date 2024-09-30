@@ -2,6 +2,7 @@ import { createContext, PropsWithChildren, useContext } from 'react';
 import { SaveOperationUseCase } from '../../core/application/operation/SaveOperationUseCase';
 import { MemoryOperationGateway } from './gateways/MemoryOperationGateway';
 import { FormOperationFactory } from './FormOperationFactory';
+import { GetOperationUseCase } from '../../core/application/operation/GetOperationUseCase';
 
 const OperationModuleContext = createContext<Context | undefined>(undefined);
 
@@ -15,16 +16,21 @@ export function OperationModuleProvider({ children }: PropsWithChildren) {
   const gateway = new MemoryOperationGateway();
   const factory = new FormOperationFactory();
   const saveOperationUseCase = new SaveOperationUseCase(gateway, factory);
+  const getOperationUseCase = new GetOperationUseCase(gateway);
 
-  <OperationModuleContext.Provider
-    value={{
-      saveOperationUseCase,
-    }}
-  >
-    {children}
-  </OperationModuleContext.Provider>;
+  return (
+    <OperationModuleContext.Provider
+      value={{
+        saveOperationUseCase,
+        getOperationUseCase,
+      }}
+    >
+      {children}
+    </OperationModuleContext.Provider>
+  );
 }
 
 type Context = {
   saveOperationUseCase: SaveOperationUseCase;
+  getOperationUseCase: GetOperationUseCase;
 };
