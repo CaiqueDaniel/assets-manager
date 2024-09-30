@@ -1,12 +1,10 @@
 import { DataGrid } from '../../../../../shared/infra/components/DataGrid';
-import { useListInvestmentsPresenter } from '../../../../core/application/investment/useListInvestmentsPresenter';
+import { useListInvestmentsPresenter } from './useListInvestmentsPresenter';
 import { MemoryInvestmentGateway } from '../../gateways/MemoryInvestmentGateway';
 import { InvestmentRow } from './components/InvestmentRow';
 
 export function ListInvestment() {
-  const { investments } = useListInvestmentsPresenter(
-    new MemoryInvestmentGateway()
-  );
+  const { investments } = useListInvestmentsPresenter();
 
   return (
     <DataGrid columns={columns}>
@@ -22,5 +20,5 @@ const columns = [
   'Quantidade total',
   'Valor total',
   'Tipo de investimento',
-  'Ações'
+  'Ações',
 ];

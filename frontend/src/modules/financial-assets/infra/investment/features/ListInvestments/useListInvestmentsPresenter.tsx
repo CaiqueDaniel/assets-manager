@@ -1,11 +1,10 @@
 import { useEffect, useState } from 'react';
 import { toast } from 'react-toastify';
-import { Investment } from '../../domain/investment/Investment';
-import { InvestmentQueryRepository } from './InvestmentQueryRepository';
+import { Investment } from '../../../../core/domain/investment/Investment';
+import { useInvestmentModuleContext } from '~/modules/financial-assets/infra/investment/InvestmentModuleContext';
 
-export function useListInvestmentsPresenter(
-  queryRepository: InvestmentQueryRepository
-) {
+export function useListInvestmentsPresenter() {
+  const { searchInvestmentsUseCase } = useInvestmentModuleContext();
   const [investments, setInvestments] = useState<Investment[]>([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [lastPage, setLastPage] = useState(1);
@@ -28,8 +27,8 @@ export function useListInvestmentsPresenter(
   };
 
   function loadItems() {
-    queryRepository
-      .search()
+    searchInvestmentsUseCase
+      .execute()
       .then(({ items, currentPage, lastPage }) => {
         setInvestments(items);
         setCurrentPage(currentPage);

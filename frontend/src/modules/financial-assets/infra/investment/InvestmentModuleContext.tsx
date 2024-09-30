@@ -2,6 +2,7 @@ import { createContext, PropsWithChildren, useContext } from 'react';
 import { MemoryInvestmentGateway } from './gateways/MemoryInvestmentGateway';
 import { FormInvestmentFactory } from '../../core/application/investment/FormInvestmentFactory';
 import { SaveInvestmentUseCase } from '../../core/application/investment/SaveInvestmentUseCase';
+import { SearchInvestmentsUseCase } from '../../core/application/investment/SearchInvestmentsUseCase';
 
 const InvestmentModuleContext = createContext<Context | undefined>(undefined);
 
@@ -15,11 +16,13 @@ export function InvestmentModuleProvider({ children }: PropsWithChildren) {
   const gateway = new MemoryInvestmentGateway();
   const factory = new FormInvestmentFactory();
   const saveInvestmentUseCase = new SaveInvestmentUseCase(gateway, factory);
+  const searchInvestmentsUseCase = new SearchInvestmentsUseCase(gateway);
 
   return (
     <InvestmentModuleContext.Provider
       value={{
         saveInvestmentUseCase,
+        searchInvestmentsUseCase,
       }}
     >
       {children}
@@ -29,4 +32,5 @@ export function InvestmentModuleProvider({ children }: PropsWithChildren) {
 
 type Context = {
   saveInvestmentUseCase: SaveInvestmentUseCase;
+  searchInvestmentsUseCase: SearchInvestmentsUseCase;
 };
