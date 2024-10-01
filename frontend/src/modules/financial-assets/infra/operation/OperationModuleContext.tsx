@@ -3,6 +3,7 @@ import { SaveOperationUseCase } from '../../core/application/operation/SaveOpera
 import { MemoryOperationGateway } from './gateways/MemoryOperationGateway';
 import { FormOperationFactory } from './FormOperationFactory';
 import { GetOperationUseCase } from '../../core/application/operation/GetOperationUseCase';
+import { SearchOperationUseCase } from '../../core/application/operation/SearchOperationUseCase';
 
 const OperationModuleContext = createContext<Context | undefined>(undefined);
 
@@ -17,12 +18,14 @@ export function OperationModuleProvider({ children }: PropsWithChildren) {
   const factory = new FormOperationFactory();
   const saveOperationUseCase = new SaveOperationUseCase(gateway, factory);
   const getOperationUseCase = new GetOperationUseCase(gateway);
+  const searchOperationUseCase = new SearchOperationUseCase(gateway);
 
   return (
     <OperationModuleContext.Provider
       value={{
         saveOperationUseCase,
         getOperationUseCase,
+        searchOperationUseCase,
       }}
     >
       {children}
@@ -33,4 +36,5 @@ export function OperationModuleProvider({ children }: PropsWithChildren) {
 type Context = {
   saveOperationUseCase: SaveOperationUseCase;
   getOperationUseCase: GetOperationUseCase;
+  searchOperationUseCase: SearchOperationUseCase;
 };
