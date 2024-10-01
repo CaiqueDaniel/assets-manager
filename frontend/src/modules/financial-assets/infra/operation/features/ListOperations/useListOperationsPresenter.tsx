@@ -1,5 +1,7 @@
 import { useEffect, useState } from 'react';
 import { toast } from 'react-toastify';
+import { useNavigate } from 'react-router-dom';
+
 import { useOperationModuleContext } from '../../OperationModuleContext';
 import { Operation } from '~/modules/financial-assets/core/domain/operation/Operation';
 
@@ -8,6 +10,10 @@ export function useListOperationsPresenter() {
   const [operations, setoperations] = useState<Operation[]>([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [lastPage, setLastPage] = useState(1);
+  const navigate = useNavigate();
+
+  const onClickBtnEdit = (id: string, investmentId: string) =>
+    navigate(`investment/${investmentId}/operation/${id}/edit`);
 
   useEffect(loadItems, []);
 
@@ -21,6 +27,7 @@ export function useListOperationsPresenter() {
     })),
     currentPage,
     lastPage,
+    onClickBtnEdit,
   };
 
   function loadItems() {

@@ -10,6 +10,7 @@ export function OperationRow({
   type,
   unitValue,
   currency,
+  onClickBtnEdit,
 }: Props) {
   return (
     <>
@@ -23,7 +24,7 @@ export function OperationRow({
       </TableCell>
       <TableCell>{new Date(date).toLocaleDateString()}</TableCell>
       <TableCell>
-        <IconButton onClick={() => {}}>
+        <IconButton onClick={onClickBtnEdit}>
           <EditIcon />
         </IconButton>
       </TableCell>
@@ -37,4 +38,5 @@ type Props = {
   quantity: number;
   unitValue: number;
   currency: CurrencyType;
+  onClickBtnEdit: () => void;
 };

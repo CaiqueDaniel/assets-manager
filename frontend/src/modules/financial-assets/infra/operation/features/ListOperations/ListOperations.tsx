@@ -3,13 +3,21 @@ import { OperationRow } from './components/OperationRow';
 import { useListOperationsPresenter } from './useListOperationsPresenter';
 import { CurrencyType } from '~/modules/financial-assets/core/domain/investment/Investment';
 
-export function ListOperations({ currency }: Props) {
-  const { operations } = useListOperationsPresenter();
+export function ListOperations({ currency, investmentId }: Props) {
+  const { operations, onClickBtnEdit } = useListOperationsPresenter();
 
   return (
     <DataGrid columns={columns}>
       {operations.map((operation) => (
-        <DataGrid.Row component={<OperationRow {...operation} currency={currency} />} />
+        <DataGrid.Row
+          component={
+            <OperationRow
+              {...operation}
+              currency={currency}
+              onClickBtnEdit={() => onClickBtnEdit(operation.id, investmentId)}
+            />
+          }
+        />
       ))}
     </DataGrid>
   );
@@ -25,5 +33,6 @@ const columns = [
 ];
 
 type Props = {
+  investmentId: string;
   currency: CurrencyType;
 };

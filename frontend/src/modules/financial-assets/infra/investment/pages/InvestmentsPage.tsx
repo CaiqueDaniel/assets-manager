@@ -25,7 +25,12 @@ export function InvestmentsPage() {
             </Box>
 
             <ListInvestment>
-              {(currency) => <ListOperations currency={currency} />}
+              {(investmentId, currency) => (
+                <ListOperations
+                  investmentId={investmentId}
+                  currency={currency}
+                />
+              )}
             </ListInvestment>
           </Paper>
         </OperationModuleProvider>

@@ -12,7 +12,7 @@ export function ListInvestment({ children }: Props) {
     <DataGrid columns={columns} nested={Boolean(children)}>
       {investments.map((investment) => (
         <DataGrid.Row component={<InvestmentRow {...investment} />}>
-          {children(investment.currency)}
+          {children(investment.id, investment.currency)}
         </DataGrid.Row>
       ))}
     </DataGrid>
@@ -28,5 +28,5 @@ const columns = [
 ];
 
 type Props = {
-  children: (currency: CurrencyType) => ReactNode;
+  children: (investmentId: string, currency: CurrencyType) => ReactNode;
 };
